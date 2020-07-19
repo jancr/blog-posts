@@ -67,16 +67,21 @@ $$
 
 ### Conditional Probability
 A conditional probability is a probability where one thing is "given" (taken as
-true).  For example $P{D\mid{}|\thehta)$ Is the probability of a positive test
-($D$) if you actually have COVID19 ($\thehta$) They can be derived from a
+true).  For example $P(D\mid{}|\theta)$ Is the probability of a positive test
+($D$) if you actually have COVID19 ($\theta$) They can be derived from a
 joined and marginal probability as follows:
 
-<!-- TODO: figure out how to align and how to force newline -->
 $$
-P(D\mid{}\theta) = \frac{P(\theta,D)}{P(\theta)}= \frac{\frac{27}{153}}{\frac{29}{153}}=\frac{27}{29}\approx{}0.931
-$$
-$$
-P(\neg{}D\mid{}\neg\theta) = \frac{P(\neg\theta,\neg{}D)}{P(\neg\theta)}= \frac{\frac{123}{153}}{\frac{124}{153}}=\frac{123}{124}\approx{}0.992
+\begin{aligned}
+P(D\mid{}\theta)           &= \frac{P(\theta,D)}{P(\theta)} 
+                           &= \frac{\frac{27}{153}}{\frac{29}{153}}
+                           &=\frac{27}{29}
+                           &\approx{}0.931 \\
+P(\neg{}D\mid{}\neg\theta) &= \frac{P(\neg\theta,\neg{}D)}{P(\neg\theta)}
+                           &= \frac{\frac{123}{153}}{\frac{124}{153}}
+                           &=\frac{123}{124}
+                           &\approx{}0.992
+\end{aligned}
 $$
 
 ## Evaluate the Data
