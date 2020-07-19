@@ -4,13 +4,27 @@ In this section we will talk about priors, what we believe prior to seeing the
 data. Sometimes Priors are very rigours, and based on previous research,
 and sometimes they are more diffuse.
 
+As in the previous post: 
+
+$$
+\begin{aligned}
+	\theta &= \text{ What we care about} \rightarrow\text{ COVID19} \\
+	D      &= \text{ What we measure (the data)} \rightarrow\text{ Test Result}
+\end{aligned}
+$$
+
+The symbol "$\neg$" means not, thus $\theta$ means has had COVID19,
+$\neg\theta$ means has not had COVID19, and $P(\theta)$ means the probability
+of COVID19, since $P(\theta)$ does not contain $D$, we call it the prior, as it
+is the prior probability of $\theta$ before we see the data.
+
 ## COVID19 Prior ($P(\theta)$)
 In March COVID19 tests were conserved for health care providers. My wifes
 coworker came down sick after coming home from a COVID19 hot zone, and
 subsequently other colleges got sick, along with my entire family. While we
-were recovering a partner of another coworker got sick and tested positive. So we
-were part of a chain were many people got sick, but only one person a few step
-removed from us were ever tested (and was positive).
+were recovering a partner of another coworker got sick and tested positive. So
+we were part of a chain were many people got sick, but only one person a few
+step removed from us were ever tested (and was positive).
 
 What is the probability that my wife had COVID19?, my wife
 had all the symptoms of a moderate case of COVID19. Because of the positive
@@ -109,12 +123,14 @@ $P(\neg{}D\mid{}\neg\theta)$.
 So my wife took an antibody test, and it was negative. Thus we have to
 reformulate Bayes Theorem and the generative process in terms of $P(\neg{}D)$
 
-First we describe how the data could be generated:
+First we describe how the data could be generated, the data here being the
+Negative test ($\neg{}D$):
 
 $$
 \begin{aligned}
-    P(\neg{}D) &= P(\neg{}D,\neg\theta) + P(\neg{}D,\theta) \\
-               &= P(\neg{}D\mid{}\neg\theta)(1 - P(\theta)) + (1 - P(D\mid{}\theta))P(\theta) 
+    P(\neg{}D) &= P(\neg{}D,\neg\theta) &+& P(\neg{}D,\theta) \\
+               &= P(\neg{}D\mid{}\neg\theta)\neg{}P(\theta) &+& P(\neg{}D\mid{}\theta)P(\theta) \\
+               &= P(\neg{}D\mid{}\neg\theta)(1 - P(\theta)) &+& (1 - P(D\mid{}\theta))P(\theta) 
 \end{aligned}
 $$
 
@@ -140,7 +156,7 @@ $$
 And then for the posterior:
 
 $$
-P(\theta\mid{}\neg{}D) = 1 - \frac{P(\neg{}D\mid{}\neg\theta)(1 - P(\theta))}{P(D)}
+P(\theta\mid{}\neg{}D) = 1 - \frac{P(\neg{}D\mid{}\neg\theta)(1 - P(\theta))}{P(\neg{}D)}
                        = 1 - \frac{\frac{123}{124}(1 - 0.85)}{0.179} \approx 0.170
 $$
 
@@ -153,4 +169,8 @@ have done is calculating a point estimates... True Bayesians think in
 distributions, There is some uncertainly associated with the Data used to
 calculate specificity and sensitivity, and there are also some uncertainly
 around my point estimate of $P(\theta)=0.85$. This is what the next few blog
-posts will be about.
+posts will be about. 
+
+The uncertainly associated with the test data is relatively easy to take into
+account, and is at the heart of Bayesian modeling, and will be the topic of the
+next post.

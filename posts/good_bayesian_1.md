@@ -19,9 +19,10 @@ Bayesian inference in a nutshell can be boiled down to 3 things:
 ## The Data
 My wife has taken an COVID19 antibody test.
 The test measures two antibodies, but for simplicity we will only look at the
-most predictive antibody IgG. The Sensitivity of IgM is only 69% and
-I suspect that the IgM and IgG test results are correlated, thus we
-can't do simple Bayesian updating :).
+most predictive antibody IgG. The Sensitivity of IgM is only 69% and I suspect
+that the IgM and IgG test results are correlated, breaking the IDD (Independent
+and Identically Distributed) assumption necessary for performing simple
+Bayesian updating :).
 
 According to **[Hoffman et al.
 ](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7178815/)** the performance
@@ -66,7 +67,9 @@ $$
 
 ### Conditional Probability
 A conditional probability is a probability where one thing is "given" (taken as
-true). They can be derived from a joined and marginal probability as follows:
+true).  For example $P{D\mid{}|\thehta)$ Is the probability of a positive test
+($D$) if you actually have COVID19 ($\thehta$) They can be derived from a
+joined and marginal probability as follows:
 
 <!-- TODO: figure out how to align and how to force newline -->
 $$
@@ -95,7 +98,7 @@ the table:
 While at first glance these may seem more useful, because it is tempting to
 interpret it as the probability of COVID19 if I have a positive test. The
 correct interpretation is "The probability of COVID19 if my prior probability
-of COVID19 is the one the one who is congruent with
+of COVID19 is the one who is congruent with
 $P(D)=\frac{28}{153}\approx{}0.183$
 
 To make this more concrete. Imagine I go out and redo the experiment, but

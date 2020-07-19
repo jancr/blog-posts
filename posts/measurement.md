@@ -17,9 +17,9 @@ The Naive solution, is of course to weight each item one time, that would give u
 
 $$
 \begin{aligned}
-	x_1 = a+\epsilon_a \\
-	x_2 = b+\epsilon_b \\
-	x_3 = c+\epsilon_c
+	x_1 = a+\epsilon \\
+	x_2 = b+\epsilon \\
+	x_3 = c+\epsilon
 \end{aligned}
 $$
 
@@ -41,9 +41,6 @@ $$
 	= 
 	\begin{bmatrix}
 		a \\ b \\ c \\
-	\end{bmatrix} +
-	\begin{bmatrix}
-		\epsilon_a \\ \epsilon_b \\ \epsilon_c \\
 	\end{bmatrix}
 \end{aligned}
 $$
@@ -63,9 +60,7 @@ $$
 	\end{bmatrix} = 
 	\begin{bmatrix}
 		a \\ b \\ c \\
-	\end{bmatrix} + \begin{bmatrix}
-		\epsilon_a \\ \epsilon_b \\ \epsilon_c \\
-	\end{bmatrix} \\
+	\end{bmatrix} 
 \end{aligned}
 $$
 
@@ -88,11 +83,7 @@ $$
 	= 
 	\begin{bmatrix}
 		a \\ b \\ \frac{c - a + b}{2} \\
-	\end{bmatrix} + \begin{bmatrix}
-		\epsilon_a \\ 
-		\epsilon_b \\
-		\frac{\epsilon_c - \epsilon_a + \epsilon_b}{2} \\
-	\end{bmatrix} \\
+	\end{bmatrix}
 \end{aligned}
 $$
 
@@ -115,11 +106,7 @@ $$
 		a \\ 
 		\frac{a+b-c}{2} \\
 		\frac{-a + b + c}{2} \\
-	\end{bmatrix} + \begin{bmatrix}
-		\epsilon_a \\ 
-		\frac{\epsilon_a+\epsilon_b-\epsilon_c}{2} \\
-		\frac{-\epsilon_a + \epsilon_b + \epsilon_c}{2} \\
-	\end{bmatrix} 
+	\end{bmatrix}
 	\\
 	\begin{bmatrix}
 		1 & 0 & 0 \\
@@ -134,11 +121,7 @@ $$
 		\frac{a-b+c}{2} \\
 		\frac{a+b-c}{2} \\
 		\frac{-a + b + c}{2} \\
-	\end{bmatrix} + \begin{bmatrix}
-		\frac{\epsilon_a-\epsilon_b+\epsilon_c}{2} \\
-		\frac{\epsilon_a+\epsilon_b-\epsilon_c}{2} \\
-		\frac{-\epsilon_a + \epsilon_b + \epsilon_c}{2} \\
-	\end{bmatrix} 
+	\end{bmatrix}
 	\\
 	\begin{bmatrix}
 		x_1 \\ x_2 \\ x_3 \\
@@ -148,11 +131,7 @@ $$
 		\frac{a-b+c}{2} \\
 		\frac{a+b-c}{2} \\
 		\frac{-a + b + c}{2} \\
-	\end{bmatrix} + \begin{bmatrix}
-		\frac{\epsilon_a-\epsilon_b+\epsilon_c}{2} \\
-		\frac{\epsilon_a+\epsilon_b-\epsilon_c}{2} \\
-		\frac{-\epsilon_a + \epsilon_b + \epsilon_c}{2} \\
-	\end{bmatrix} 
+	\end{bmatrix}
 \end{aligned}
 $$
 
@@ -163,18 +142,69 @@ weighing two at a time has bought us.
 Intuitively two thing can happen:
 
 1. The error has increased because variances are additive:
-    * $T = X + Y$
+    * $T = X + Y$ 
     * $\sigma_{T}^2 = \sigma_{X}^2 + \sigma_{Y}^2$
 2. The error has decreased because the standard error of the mean is defined as:
     * $\epsilon = \frac{\sigma^2}{\sqrt{N}}$
 
-I do not know how to calculate the exact variance of the weighting twice
-strategy. But, I know from the above matrix how the error terms are added
-together. So we can simply sample from the error distribution, and compare to
-the naive solution.
+We can now calculate $\epsilon_2$, for our two at a time trick, by 
+exploiting the fact that variances are additives (even if two variables are
+subtracted from each other). Because all $x_i$ are a linear combination of all 3
+measurements: $a$, $b$ and $c$, they will have the same variance
+($\epsilon_2$). 
+<!-- Because $Var(a) = Var(-a) = \epsilon$ -->
+
+$x_1$ can be rewritten as:
+
+$$
+x_1 = \frac{a-b+c}{2} = \frac{a}{2} + \frac{-b}{2} + \frac{c}{2}
+$$
+
+The error for $a$, $b$ and $c$ is $\epsilon=1$. Let's calculate $\epsilon_2$,
+the error of the two at a time strategy.
+
+$$
+\begin{aligned}
+    \epsilon_2^2 &= Var(x_1) \\
+                 &= Var(\frac{a}{2}) + Var(\frac{-b}{2}) + Var(\frac{c}{2}) \\
+                 &= \sum_{i=1}^{3} Var(\frac{\epsilon}{2}) \\
+                 &= \frac{3\epsilon^2}{2^2} = \frac{3\epsilon^2}{4} \\
+    \epsilon_2   &= \sqrt{\frac{3\epsilon^2}{4}} = \frac{\sqrt{3}\epsilon}{2} 
+                    \approx{}0.866\epsilon 
+\end{aligned}
+$$
+
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!--     x_1 = \frac{a-b+c}{2} = \frac{a}{2} + \frac{-b}{2} + \frac{c}{2} -->
+<!--     \epsilon_2^2 &= Var(x_1) = \frac{a}{2} + \frac{-b}{2} + \frac{c}{2} -->
+<!--  -->
+<!--     \epsilon_2^2 &= Var(x_1) = Var(x_2) = Var(x_3) \\ -->
+<!--                  &= \sum_{i=1}^3\frac{1^2}{2^2} = \frac{3}{4} \\ -->
+<!--     \epsilon_2   &= \sqrt{\frac{3}{4}} = \frac{\sqrt{3}}{2} \approx{}0.866  -->
+<!-- \end{aligned} -->
+<!-- $$ -->
+
+Resulting in a $\epsilon_2=0.87\epsilon$, so a 13% error reduction.
+Which is almost half as good as cheating and performing the naive experiment
+twice:
+
+$$
+\begin{aligned}
+    \epsilon_{twice} &= \frac{\epsilon}{\sqrt{2}}
+                     &= 0.71\epsilon
+\end{aligned}
+$$
+
+
+## Optional: Sampling to sanity check the $\epsilon_2$
+
+Before I figured out how to calculate $\epsilon_2$, I found it by sampling.
 
 Intuitively the error on $x_a$, $x_b$ and $x_c$ should follow the same
-distribution, let's call it $\epsilon_2$ all the $\epsilon$ follow a $N(0,1)$ distribution, and because the normal distribution is symmetrical around it's mean:
+distribution, let's call it $\epsilon_2$ all the $\epsilon$ follow a $N(0,1)$
+distribution, and because the normal distribution is symmetrical around it's
+mean:
 
 $$
 N(0,1)=-N(0,1)
@@ -184,14 +214,16 @@ We can (while sampling from it) perform the following simplification.
 
 $$
 \begin{aligned}
-	\epsilon_2 &= \frac{1}{2}\sum_{i=1}^{3}\epsilon  \\
-               &\approx \frac{\epsilon_a-\epsilon_b+\epsilon_c}{2} \\
-               &\approx \frac{\epsilon_a+\epsilon_b-\epsilon_c}{2} \\
-               &\approx \frac{-\epsilon_a + \epsilon_b + \epsilon_c}{2}
+    \epsilon_2 &=\pm\frac{a_{error}}{2} \pm\frac{b_{error}}{2} \pm\frac{c_{error}}{2} \\ 
+               &= \frac{\epsilon'}{2} + \frac{\epsilon'}{2} + \frac{\epsilon'}{2} \\ 
+               &= \frac{1}{2}\sum_{i=1}^{3}\epsilon'  \\
 \end{aligned}
 $$
 
-Which means the $\epsilon_2$ estimate will be true for all $x_i$.
+Where $\epsilon'$ is a random variable drawn from from the error distribution
+$N(0, \epsilon)$
+
+<!-- Which means the $\epsilon_2$ estimate will be true for all $x_i$. -->
 
 We estimate $\epsilon_2$ by 1. Sampling $3\times{}10^6$ times from a normal
 distribution with $N(0, 1)$, and then reshape it to $(10^6, 3)$. 2. We sum over
@@ -205,19 +237,120 @@ data = sp.stats.norm(0, 1).rvs(3*N).reshape(N, 3)
 mu = data.sum(1) / 2
 ```
 
-Since the error distribution was centered on 0, the standard error is:
+Since the error distribution was centered on 0, the variance of the error is:
 
 $$
-\epsilon_2 = \frac{1}{N}\sum_{i=1}^{N} (\mu - 0)^2
+\begin{aligned}
+    \epsilon_2^2 &= \frac{1}{N}\sum_{i=1}^{N} (\mu_i - 0)^2
+    \epsilon_2   &= \sqrt(\epsilon_2^2)
+\end{aligned}
 $$
 
 Which is equivalent to the following python:
 
 ```
-epsilon2 = ((mu - 0) ** 2).sum() / N  # 0.75
+epsilon2_var = ((mu - 0) ** 2).sum() / N  # 0.75
+epsilon2_sd = epsilon2_sd ** 0.5  # 0.87
 ```
 
-Resulting in a $\epsilon_2=0.75\epsilon$, so a 25% error reduction.
+Resulting in a $\epsilon_2=0.87\epsilon$, so a 13% error reduction.
+Which is almost half as good as cheating and performing the naive experiment
+twice:
 
-So the weighing two at a time is almost as good as weighting every item twice
-($\frac{1}{\sqrt{2}}=0.71$), which would require using the weight 6 times!
+$$
+\begin{aligned}
+    \epsilon_{twice} &= \frac{\epsilon}{\sqrt{2}}
+                     &= 0.71\epsilon
+\end{aligned}
+$$
+
+
+## Optional: Solutions worse than the Naive
+One may be tempted to think that if weighing two at a time is good because you
+got 8 measurements, then maybe 9 measurements are better
+
+Thus, instead of
+
+$$
+\begin{aligned}
+	X_{3,3} = 
+	\begin{bmatrix}
+		1 & 1 & 0 \\
+		0 & 1 & 1 \\
+		1 & 0 & 1 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		x_1 \\ x_2 \\ x_3 \\
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		a \\ b \\ c \\
+	\end{bmatrix} 
+\end{aligned}
+$$
+
+We do:
+
+$$
+\begin{aligned}
+	X_{3,3} = 
+	\begin{bmatrix}
+		1 & 1 & 1 \\
+		0 & 1 & 1 \\
+		1 & 0 & 1 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		x_1 \\ x_2 \\ x_3 \\
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		a \\ b \\ c \\
+	\end{bmatrix} 
+\end{aligned}
+$$
+
+That unfortunately do not check out as one might expect
+
+$$
+\begin{aligned}
+	\begin{bmatrix}
+		1 & 1 & 1 \\
+		0 & 1 & 1 \\
+		1 & 0 & 1 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		x_1 \\ x_2 \\ x_3 \\
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		a \\ b \\ c \\
+	\end{bmatrix} 
+    \\
+	\begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		x_1 \\ x_2 \\ x_3 \\
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		a - b \\ a - c \\ b + c - a \\
+	\end{bmatrix} 
+\end{aligned}
+$$
+
+So with two at a time, the variance became half of all 3 measurements, resulting
+in $\frac{3}{4}$, now we only have addition, no devision, so the variance of
+$x_1$ and $x_2$ is 
+
+$$
+\epsilon_{1\text{ or }2}^2=\sum_{i=1}^{2}1^2=2
+$$ 
+
+The variance of $x_3$ is even worse
+
+$$
+\epsilon_{3}^2=\sum_{i=1}^{3}1^2=3
+$$
+
+## Optional: work smart not hard
+
+
