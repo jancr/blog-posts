@@ -1,4 +1,6 @@
-# Good Bayesian - Part 1 - Probability 101
+# Good Bayesian - Part 1 
+
+## Probability 101
 
 <!-- Bayesian Statistics Has become quite popular, in the following few posts I will -->
 <!-- try to show how to  -->
@@ -6,14 +8,16 @@
 The following short series is inspired by two papers by Kruschke and Liddell: 
 
 1. [Bayesian data analysis for newcomers](https://link.springer.com/article/10.3758/s13423-017-1272-1)
-2. [The Bayesian New Statistics: Hypothesis testing, estimation, meta-analysis, and power analysis from a Bayesian perspective](https://link.springer.com/article/10.3758/s13423-016-1221-4)
+2. [The Bayesian New Statistics: Hypothesis testing, estimation, meta-analysis,
+   and power analysis from a Bayesian
+   perspective](https://link.springer.com/article/10.3758/s13423-016-1221-4)
 
 Bayesian inference in a nutshell can be boiled down to 3 things:
 <!-- of which I plan to cover the first 3 in this series. -->
 
-1. Rules of probability.
-2. Priors matter
-3. Think in distribution not point estimates
+1. Rules of probability (this post)
+2. [Priors matter](../../blog/good-bayesian-2/)
+3. Think in distribution not point estimates (coming soon)
 <!-- 4. (The generative process: how was my data generated) -->
 
 ## The Data
@@ -38,11 +42,11 @@ of the test is reported as follows:
 If we divide all the cells of the above table by the total (153), then we can turn the table of
 counts into a table of probabilities.
 
-|                             | Cases ($P(\theta)$)            | Healthy ($P(\neg\theta)$)       | Total  |
-|-----------------------------|--------------------------------|---------------------------------|-------------------------------------|
-| IgG positive ($P(D)$)       | $\frac{27}{153}\approx{}0.176$ | $\frac{1}{153}\approx{}0.007$   | $\frac{28}{153}\approx{}0.183$      |
-| IgG negative ($P(\neg{}D)$) | $\frac{2}{153}\approx{}0.013$  | $\frac{123}{153}\approx{}0.804$ | $\frac{125}{153}\approx{}0.817$     |
-| Total                       | $\frac{29}{153}\approx{}0.190$ | $\frac{124}{153}\approx{}0.810$ | $\frac{153}{153}=1$                  |
+|                             | Cases ($P(\theta)$)   | Healthy ($P(\neg\theta)$) | Total                  |
+|-----------------------------|-----------------------|---------------------------|------------------------|
+| IgG positive ($P(D)$)       | $27/153\approx 0.176$ | $1/153\approx 0.007$      | $28/153\approx 0.183$  |
+| IgG negative ($P(\neg D)$)  | $2/153\approx 0.013$  | $123/153\approx 0.804$    | $125/153\approx 0.817$ |
+| Total                       | $29/153\approx 0.190$ | $124/153\approx 0.810$    | $153/153=1$            |
 
 
 ### Joint Probability
@@ -108,7 +112,8 @@ $P(D)=\frac{28}{153}\approx{}0.183$
 
 To make this more concrete. Imagine I go out and redo the experiment, but
 instead of recruiting 124 healthy and 29 survivors, I recruit 124 healthy and 58
-survivors. Then the table I would expect to receive (ignoring random variation) would be one with $\times{}2$ in the "Cases" column as follows: 
+survivors. Then the table I would expect to receive (ignoring random variation)
+would be one with $\times{}2$ in the "Cases" column as follows: 
 
 |              | Cases | Healthy | Total |
 |--------------|-------|---------|-------|
@@ -116,7 +121,8 @@ survivors. Then the table I would expect to receive (ignoring random variation) 
 | IgG negative | 4     | 123     | 127   |
 | Total        | 58    | 124     | 182   |
 
-Now all the joined probabilities have changed, but how does the 4 conditional probabilities pan out? (stop and think)
+Now all the joined probabilities have changed, but how does the 4 conditional
+probabilities pan out? (stop and think)
 
 
 $$
@@ -150,5 +156,5 @@ Hey... Wait a minute! While I now understand why $P(D\mid{}\theta)$ and
 $P(\neg{}D\mid{}\neg\theta)$ are what I should use for evaluating tests, my primary
 goal was not to figure out how good the tests were, but what I should believe
 after taking a test, "given a test results, what is the probability of
-COVID19", or formally $P(\theta\mid{}D)$ or $P(\theta\mid{}\neg{}D)$... Well, stay tuned
-for the next blog post.
+COVID19", or formally $P(\theta\mid{}D)$ or $P(\theta\mid{}\neg{}D)$...  Well,
+that you can read in [part 2](../../blog/good-bayesian-2/)

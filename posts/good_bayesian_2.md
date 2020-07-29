@@ -1,10 +1,12 @@
-# Good Bayesian - Part 2 - Priors and Bayes Theorem
+# Good Bayesian - Part 2 
+
+## Priors and Bayes Theorem
 
 In this section we will talk about priors, what we believe prior to seeing the
 data. Sometimes Priors are very rigours, and based on previous research,
 and sometimes they are more diffuse.
 
-As in the previous post: 
+As in [the previous post:](../../blog/good-bayesian-2/)
 
 $$
 \begin{aligned}
@@ -19,7 +21,7 @@ of COVID19, since $P(\theta)$ does not contain $D$, we call it the prior, as it
 is the prior probability of $\theta$ before we see the data.
 
 ## COVID19 Prior ($P(\theta)$)
-In March COVID19 tests were conserved for health care providers. My wifes
+In March COVID19 tests were conserved for health care providers. My wife's
 coworker came down sick after coming home from a COVID19 hot zone, and
 subsequently other colleges got sick, along with my entire family. While we
 were recovering a partner of another coworker got sick and tested positive. So
