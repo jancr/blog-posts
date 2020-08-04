@@ -71,7 +71,7 @@ $$
 
 ### Conditional Probability
 A conditional probability is a probability where one thing is "given" (taken as
-true).  For example $P(D\mid{}|\theta)$ Is the probability of a positive test
+true).  For example $P(D\mid{}\theta)$ Is the probability of a positive test
 ($D$) if you actually have COVID19 ($\theta$) They can be derived from a
 joined and marginal probability as follows:
 
@@ -95,8 +95,8 @@ The two conditional probabilities above have special names:
 * $P(D\mid{}\theta)$ read as "the probability of D given theta", is the tests
   sensitivity, and is the probability of getting a positive test if you have
   had COVID19. 
-* $P(\neg{}D\mid{}\neg\theta)$ is the specificity of the test, the probability of a
-  negative test if you have not had COVID19.
+* $P(\neg{}D\mid{}\neg\theta)$ is the specificity of the test, the probability
+  of a negative test if you have not had COVID19.
 
 There are also two other conditional probabilities which can be derived from
 the table:

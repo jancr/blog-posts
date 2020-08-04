@@ -131,7 +131,7 @@ Negative test ($\neg{}D$):
 $$
 \begin{aligned}
     P(\neg{}D) &= P(\neg{}D,\neg\theta) &+& P(\neg{}D,\theta) \\
-               &= P(\neg{}D\mid{}\neg\theta)\neg{}P(\theta) &+& P(\neg{}D\mid{}\theta)P(\theta) \\
+               &= P(\neg{}D\mid{}\neg\theta){}P(\neg\theta) &+& P(\neg{}D\mid{}\theta)P(\theta) \\
                &= P(\neg{}D\mid{}\neg\theta)(1 - P(\theta)) &+& (1 - P(D\mid{}\theta))P(\theta) 
 \end{aligned}
 $$
