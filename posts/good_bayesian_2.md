@@ -39,7 +39,7 @@ picking 3% (the number of people in Denmark with antibodies).
 
 <!-- The following is a mess -->
 
-## COVID19 Posterior ($P(\theta\mid{}D$)
+## COVID19 Posterior ($P(\theta\mid{}D$))
 In the previous post we learned that
 
 $$
