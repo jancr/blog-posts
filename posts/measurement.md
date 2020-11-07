@@ -12,6 +12,14 @@ The above "riddle" is of course, weird, because rarely scales are expensive to
 use, however most people have an intuitive understanding of how they work, so I
 am using it as a standing for any scientific readout.
 
+## TLDR (no math intuitive solution)
+If you measure them in pairs of two, then you can recover the original mass, by
+adding the two measurements which contains the item of interest, and
+subtracting the one measurement that do not, that reduces the overall error
+because you now have 3 half measurements, each of those 3 measurements only
+have a quarter of squared error, adding these errors up gives $\frac{3}{4}$ squared
+error, which is less than 1, which you get from measuring them individually.
+
 ## Naive Solution
 The Naive solution, is of course to weight each item one time, that would give us
 
@@ -32,11 +40,11 @@ equation, corresponding to one measurement ($a$, $b$ or $c$):
 
 $$
 \begin{aligned}
-	X_{3,3} = 
+	X = 
 	\begin{bmatrix}
 		x_{1} & x_{2} & 0     \\
 		0     & x_{2} & x_{3} \\
-		0     & 0     & x_{3} \\
+		x_{1} & 0     & x_{3} \\
 	\end{bmatrix}
 	= 
 	\begin{bmatrix}
@@ -49,7 +57,7 @@ Then we factor the $x_i$ into it's own vector, to make the matrix simpler:
 
 $$
 \begin{aligned}
-	X_{3,3} = 
+	X = 
 	\begin{bmatrix}
 		1 & 1 & 0 \\
 		0 & 1 & 1 \\
@@ -185,7 +193,7 @@ $$
 <!-- \end{aligned} -->
 <!-- $$ -->
 
-Resulting in a $\epsilon_2=0.87\epsilon$, so a 13% error reduction.
+Again yielding $\epsilon_2=0.87\epsilon$
 Which is almost half as good as cheating and performing the naive experiment
 twice:
 
@@ -253,16 +261,7 @@ epsilon2_var = ((mu - 0) ** 2).sum() / N  # 0.75
 epsilon2_sd = epsilon2_sd ** 0.5  # 0.87
 ```
 
-Resulting in a $\epsilon_2=0.87\epsilon$, so a 13% error reduction.
-Which is almost half as good as cheating and performing the naive experiment
-twice:
-
-$$
-\begin{aligned}
-    \epsilon_{twice} &= \frac{\epsilon}{\sqrt{2}}
-                     &= 0.71\epsilon
-\end{aligned}
-$$
+Again yielding $\epsilon_2=0.87\epsilon$
 
 
 ## Optional: Solutions worse than the Naive
@@ -273,7 +272,7 @@ Thus, instead of
 
 $$
 \begin{aligned}
-	X_{3,3} = 
+	X = 
 	\begin{bmatrix}
 		1 & 1 & 0 \\
 		0 & 1 & 1 \\
@@ -292,7 +291,7 @@ We do:
 
 $$
 \begin{aligned}
-	X_{3,3} = 
+	X = 
 	\begin{bmatrix}
 		1 & 1 & 1 \\
 		0 & 1 & 1 \\
@@ -350,7 +349,5 @@ The variance of $x_3$ is even worse
 $$
 \epsilon_{3}^2=\sum_{i=1}^{3}1^2=3
 $$
-
-## Optional: work smart not hard
 
 

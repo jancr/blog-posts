@@ -1,6 +1,6 @@
 # Communism is Universal Preferable Behaviour
 
-Stefan Molyneux is a right-wing darling who has "proven" the validity of UPB
+Stefan Molyneux is a right-wing darling who have "proven" the validity of UPB
 (**U**niversal **P**referable **B**ehaviour), thus he has conquered the
 is-ought gap of ethics.
 
@@ -9,19 +9,20 @@ is-ought gap of ethics.
 He uses UPB to "prove" all the tenets of libertarian ideology. Here is an
 example:
 
-"You can't want to steal and to be stolen from, Hench stealing is ommunism_is_upb.md good_bayesian_1.md good_bayesian_2.md
-t UBP, something, something, property rights is UBP"
+"You can't simultaneously, want to steal and to be stolen from, Hench stealing
+is UBP, something, something, property rights is UBP"
 
 In that vein I would like to offer:
 
-"You can't want to be of above average wealth, and of below average wealth,
-**BOOM!** communism is UPB, capitalism is not."
+"You can't simultaneously want to be of above average wealth, and of below
+average wealth, **BOOM!** communism is UPB, capitalism is not."
 
 ## Arguing for UPB is not UPB
 
 If you want an philosopher to explain why Molyneux does not conquer the
 is-ought gap then I can recommend [Rationality Rules: "Molyneux Humean
-Disaster"](https://www.youtube.com/watch?v=tYLvbutgjKU) or [Their debate](https://www.youtube.com/watch?v=obdW6p_pvA0)
+Disaster"](https://www.youtube.com/watch?v=tYLvbutgjKU) or [Their
+debate](https://www.youtube.com/watch?v=obdW6p_pvA0)
 
 One of the most annoying things about UPB is that Stefan literally argues that 
 arguing against UPB "proves" UPB, here is the argument, from page 40 of
@@ -49,9 +50,10 @@ from 1) and 2) is only has two steps in predicate logic (next section). Where th
 original premise can not even be rendered in predicate logic! You might be able
 to render it in first order logic, but that is beyond me :)
 
-The above argument however commits the [Proving too much fallacy](https://slatestarcodex.com/2013/04/13/proving-too-much/). So either premise 1
-or premise 2 is wrong... So maybe arguing for UBP does not demonstrates
-Universal Preferable Behavior!
+The above argument however commits the [Proving too much
+fallacy](https://slatestarcodex.com/2013/04/13/proving-too-much/). So either
+premise 1 or premise 2 is wrong... So maybe arguing for UBP does not
+demonstrates Universal Preferable Behavior!
 
 ## Formal Proof of my UPB argument
 
