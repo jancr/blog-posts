@@ -384,7 +384,7 @@ To:
 $y = invlogit(a\times{}logit(x) + b)$
 
 We transforms our $x$ (Scotts predictions) to the $logit$ scale and multiply it by $a$,
-if he is perfectly calibrated $a$ will still be close to $1$, but not it is
+if he is perfectly calibrated $a$ will still be close to $1$, but now it is
 hard to conceptualize what $a=2$ means, one solution is to guess a prior and
 then draw samples from it to see if it matches your intuition, while this may
 seem silly, it is actually a much better idea than trying to guess what is
@@ -564,10 +564,8 @@ ax = fig.add_subplot(111, xlabel='If I predict something with this probability..
                      ylabel='then it has this probability of coming true...', 
                      title='Bayesian Logistic Model of SSC 2019 Predictions')
 
-for credible_line, style, label in ((credible_95, 'r-', "95% HDI"), (credible_50, 'y-', "50% HDI")):
-    ax.plot(line, credible_line[:, 0], style)
-    ax.plot(line, credible_line[:, 1], style)
-    ax.plot([], [], style, label=label)
+for credible_line, label in ((credible_95, "95% HDI"), (credible_50, "50% HDI")):
+	ax.fill_between(line, credible_line[:, 0], credible_line[:, 1], label=label)
 
 map_line = expit(trace["b"].mean() + trace["a"].mean() * line_log_odds)
 ax.plot(line, map_line, 'b-', label="Most Credible Model")

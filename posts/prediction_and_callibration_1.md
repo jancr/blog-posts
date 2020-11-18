@@ -68,7 +68,7 @@ product of the 3 Bernoulli likelihoods:
 $$
 \begin{aligned}
 P(\theta|Y) &= \prod_{i=1}^{3} p(\theta_i|y_i) \\
-			&= 0.6\times(1 - 0.6)0.7 = 0.168
+			&= 0.6\times(1 - 0.6)\times{}0.7 = 0.168
 \end{aligned}
 $$
 

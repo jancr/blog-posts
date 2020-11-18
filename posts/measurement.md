@@ -199,7 +199,7 @@ twice:
 
 $$
 \begin{aligned}
-    \epsilon_{twice} &= \frac{\epsilon}{\sqrt{2}}
+    \epsilon_{twice} &= \frac{\epsilon}{\sqrt{2}} \\
                      &= 0.71\epsilon
 \end{aligned}
 $$
@@ -249,8 +249,8 @@ Since the error distribution was centered on 0, the variance of the error is:
 
 $$
 \begin{aligned}
-    \epsilon_2^2 &= \frac{1}{N}\sum_{i=1}^{N} (\mu_i - 0)^2
-    \epsilon_2   &= \sqrt(\epsilon_2^2)
+    \epsilon_2^2 &= \frac{1}{N}\sum_{i=1}^{N} (\mu_i - 0)^2 \\
+    \epsilon_2   &= \sqrt{\epsilon_2^2}
 \end{aligned}
 $$
 
