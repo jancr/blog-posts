@@ -1,4 +1,4 @@
-# The tail of the forager and the druid
+# We were here first
 
 My ancestor was a druid, who healed the sick and shared the tales of
 [Epona](https://en.wikipedia.org/wiki/Epona), she had a good life, when she
@@ -29,5 +29,5 @@ barbarians, but alas, even mountains have been enclosed by modernity.
 
 The story was inspired by the by the [slate star codex post
 burdens](https://slatestarcodex.com/2014/08/16/burdens/), and the song [Ins
-Mona - Eluveiti](https://www.youtube.com/watch?v=iijKLHCQw5o)
+Mona by Eluveiti](https://www.youtube.com/watch?v=iijKLHCQw5o)
 
