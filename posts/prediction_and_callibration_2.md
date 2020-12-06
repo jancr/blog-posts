@@ -2,7 +2,7 @@
 
 This is the second post in a series about prediction and calibration.
 
-In [the previous post:](../../blog/bayesian-prediction-calibration-1/) we learn
+In [the previous post:](../../blog/bayesian-prediction-and-calibration-1/) we learn
 what a likelihood function is, and used it to evaluate predictions
 
 We will now Make a Bayesian calibration model, in two steps:
@@ -83,7 +83,9 @@ a linear regression, where we try to predict $y$ from Scotts guesses ($x$)
 
 We will use the 'classical' linear model:
 
-$y = ax + b + \epsilon$
+$$
+y = ax + b + \epsilon
+$$
 
 Where $a$ is the slope, $b$ the intercept and $\epsilon$ is the residual error
 not explained by the model.
@@ -95,11 +97,15 @@ What should the prior for $a$ and $b$ be?, starting with $b$, which describes ho
 a person systematically predicts to high or to low, let's assume that it is
 normal distributed around $0\pm0.1$:
 
-$b \sim N(0, 0.1)$
+$$
+b \sim N(0, 0.1)
+$$
 
 $a$ is the slope, most people are bad predictors, so we set a broad prior around $1$
 
-$a \sim N(1, 0.5)$
+$$
+a \sim N(1, 0.5)
+$$
 
 Finally no model is perfect, so we need a distribution for the residual error
 $\epsilon$, we call this function the likelihood function because it predict how
@@ -109,11 +115,15 @@ residual error, the likelihood function will be broad, $\sigma$ of this
 likelihood function also needs a prior, which we choose (for convenience) to be
 uniform, meaning any value in a range is equally likely:
 
-$\sigma \sim U(0, 100)$
-
-$\epsilon \sim N(ax + b, \sigma)$
+$$
+\begin{aligned}
+	\sigma   &\sim U(0, 100) \\
+	\epsilon &\sim N(ax + b, \sigma) \\
+\end{aligned}
+$$
 
 Putting it all together in a Full Model specification:
+
 $$
 \begin{aligned}
     a &\sim N(1, 0.5) \\
@@ -364,7 +374,9 @@ the odds for $p>\frac{1}{2}$ are confined to 1 to infinity, this is of course
 bad if we want our model think that $0.9$ is as close to True as $0.10$ is to
 False, the solution is to go with log odds, this works because:
 
-$log(\frac{a}{b}) = -log(\frac{b}{a})$
+$$
+log(\frac{a}{b}) = -log(\frac{b}{a})
+$$
 
 Thus the odds 1:3 and 3:1 is equally fare away from zero.
 
@@ -377,11 +389,15 @@ called the inverse logistic function or $expit$
 
 Thus we will adapt our model from:
 
-$y = ax + b$
+$$
+y = ax + b
+$$
 
 To: 
 
-$y = invlogit(a\times{}logit(x) + b)$
+$$
+y = invlogit(a\times{}logit(x) + b)
+$$
 
 We transforms our $x$ (Scotts predictions) to the $logit$ scale and multiply it by $a$,
 if he is perfectly calibrated $a$ will still be close to $1$, but now it is
@@ -396,13 +412,17 @@ $b$ is the factor we think people are systematically over or
 underestimating, I would say probably less than 5% are off by a factor of $e\approx{}3$,
 so when they says 1:10 is probably between 1:3 and 1:30
 
-$b \sim N(0, 0.5)$
+$$
+b \sim N(0, 0.5)
+$$
 
 $a$ how much do we think people over or under exaggerate, as a factor in logit
 space, probably less than 2% are so wrong that the higher they predict the LESS
 certain they are, so we set $\sigma=0.5$.
 
-$b \sim N(0, 0.5)$
+$$
+b \sim N(0, 0.5)
+$$
 
 So let's specify our full Model:
 
@@ -587,3 +607,10 @@ plt.legend(loc=0);
 ![png](prediction_and_callibration_2_files/prediction_and_callibration_2_22_1.png)
     
 
+
+**How to read the figure**
+The original figure from [SSC](https://slatestarcodex.com/2020/04/08/2019-predictions-calibration-results/)
+Had a line of perfect callibration ($y=1x+0$) and scots binned data (x'es)
+We have furthermore added a line displaying the mean model (the blue line), but
+because we are bayesians we have uncertancy arround this line, which we have
+filled in with orange and blue for the 50 and 95 percentile model fits.

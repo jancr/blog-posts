@@ -6,8 +6,10 @@ calibrated predictor.
 
 In this series we will try to achieve 2 things:
 
-1. (this post) Understand what a likelihood function is, and use it to evaluate predictions
-2. (next post) Make a Bayesian calibration model
+1. (this post) We try to Understand what a likelihood function is, and use it
+   to evaluate predictions
+2. [(next post)](../../blog/bayesian-prediction-and-calibration-1/) We Make a
+   Bayesian calibration model
 
 ## The likelihood function
 
@@ -83,7 +85,7 @@ So the likelihood of 3 above predictions are: $\frac{0.168}{0.5^3}\approx{}1.34$
 times more likely than random. Making this person slightly better than random
 
 
-### How good a predictor is Scott
+## How good a predictor is Scott
 
 Because Scott has made a lot of prediction, and because we will later implement
 a 'calibration' model of Scott, let's try to compare the likelihood of his 2019
@@ -140,6 +142,8 @@ let's define our term:
 <!-- of whether to include his 50:50 predictions is mute, as his likelihood ratio -->
 <!-- compared to the null model remains unchanged. -->
 
+## Prediction vs Calibration
+
 **Predictor:**
 
  * A good predictor is a person who predict better than random:
@@ -151,7 +155,7 @@ let's define our term:
 
 It may be hard to understand how you can be worse than random, and that
 of course takes skill, but if Scott had flipped all his guesses, his likelihood
-ratio would be $\frac{1}{7\times{}10^9}$ which is much less than 1
+ratio would be $\frac{1}{7\times{}10^9}$ which is much less than 1.
 
 <!-- Prediction is very task dependent and is therefore only comparable if the -->
 <!-- prediction is on the same data, two set of predictions can be compared by comparing -->
@@ -165,7 +169,7 @@ it?
 
  * A well calibrated predictor is a person where the predictions match the
    outcome frequency.
- 
+
 **Example**
 * Person A predict 100 things with 60% confidence, 61 of them turns out to
   occur, because $\frac{61}{100} \approx 0.6$ this person is very well
@@ -180,12 +184,16 @@ as well calibrated. Let's evaluate the likelihood of their claims:
 Person A's prediction is equivalent to 61 'correct' 60% predictions and 39
 'correct' 40% predictions, yielding the following likelihood:
 
-$0.6^{61}\times{}0.4^{39} \approx 8.86\times{}10^{-30}$
+$$
+0.6^{61}\times{}0.4^{39} \approx 8.86\times{}10^{-30}
+$$
 
 Person A's prediction is equivalent to 69 'correct' 80% predictions and 21
 'correct' 20% predictions, yielding the following likelihood
 
-$0.8^{67}\times{}0.4^{33} \approx 2.76\times{}10^{-30}$
+$$
+0.8^{67}\times{}0.4^{33} \approx 2.76\times{}10^{-30}
+$$
 
 Because $8.86\times{}10^{-30} > 2.76\times{}10^{-30}$ Person A is also a better
 predictor than person B, to get an intuition of why, let's consider person C:
@@ -195,17 +203,17 @@ occur, person C a very bad and miss calibrated prediction, because something imp
 happened! This is also reflected in the likelihood of his predictions, which is
 zero:
 
-$1^{99}\times{}0^1=0$
+$$
+1^{99}\times{}0^1=0
+$$
 
 **Summary so fare**
 
-So we can improve our predictions likelihood by being very knowledgeable as Person B or well
-calibrated as person A. Now it is of course much harder to achieve omniscience
-than epistemic humility, which is why the Bayesian rationalist community and
-the rest of this post will focus on the calibration part.
-
-
-<!-- **I want to build a Golem, C'mon let's go and wreck Prage - Anna, famous model builder** -->
+So we can improve our predictions likelihood by being very knowledgeable as
+Person B or well calibrated as person A. Now it is of course much harder to
+achieve omniscience than epistemic humility, which is why the Bayesian
+rationalist community and the rest of this post will focus on the calibration
+part.
 
 How good a predictor you are can be evaluated by the product of your likelihood
 function, is there a better way to evaluate this, yes, make a model!
