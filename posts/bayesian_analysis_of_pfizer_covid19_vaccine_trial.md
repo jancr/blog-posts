@@ -178,7 +178,7 @@ $\alpha+\beta$ which is 1.7, so we should expect the prior to be very broad.
 
 
 Let's plot it, we use the `plot_dist` function which plots the distribution of
-$\theta$ to the left, we uses the formula $VE = \frac{1 - 2\theta}{1 -
+$\theta$ to the left, we uses the formula $aE = \frac{1 - 2\theta}{1 -
 \theta}$ to convert $\theta$ to $VE$ which is plot on the right.
 
 ```python
@@ -198,8 +198,9 @@ And it is very broad given credibility to all values of $\theta$ between 0 and
 ### Side quest - Bayesian Updating
 Before we calculate the likelihood of the data, let's try to see how the prior
 changes if 1 person from each group fell ill. We use the Bernoulli likelihood
-to simulate 'draw', the Bernoulli likelihood is function a triangle, because 
-$p(1|theta)=\theta$ (hint: like $y=x$) and $p(0|\theta)=1-\theta$ (hint: $y=1-x$)
+to simulate a 'draw', the Bernoulli likelihood function is a triangle, because 
+$p(1\mid\theta)=\theta$ (hint: like $y=x$) and $p(0\mid\theta)=1-\theta$ (hint:
+$y=1-x$)
 
 Here is the plot if we had only 1 data point and it was 0 (from the control),
 on the left we have the prior (as above), in the middle we have the triangle
