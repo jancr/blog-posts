@@ -18,7 +18,7 @@ which can be summarized as follows:
    (Vaccine Efficacy) interval exclude 30%.
 
 If you are unfamiliar with the dichotomous distributions (Beta, Bernoulli and
-Binomial), then you should read [this](../../dichotomous-distributions) before
+Binomial), then you should read [this](../dichotomous-distributions) before
 continuing, or wing it
 
 It is obvious when there are 8 in one group and 162 in the other group, then the
@@ -285,15 +285,14 @@ the likelihood is much narrower than the prior.
 
 There are a few ways to get a posterior from a prior and a likelihood, 3 popular methods include:
 
-1. Use sampling.
-   * This is what modern Bayesians does, unless they have very simple models like
-     this one.
-2. Use grid approximation, as we did with the Bernoulli example.
-   * This is excellent for teaching purposes, because it's intuitive, but in
-     practice this only works for models with very few parameters,
-3. Exploit the fact that the priors are conjugated, this we will also do.
-   * This is super cool, and easy when you know the solution, but only works for
-     small models and a small subset of prior-likelihood combinations.
+1. Use sampling, This is what modern Bayesians does, unless they have very
+   simple models like this one.
+2. Use grid approximation, as we did with the Bernoulli example, This is
+   excellent for teaching purposes, because it's intuitive, but in practice
+   this only works for models with very few parameters,
+3. Exploit the fact that the priors and likelihood are conjugated, this we will
+   also do, it is super cool, and easy when you know the solution, but only
+   works for small models and a small subset of prior-likelihood combinations.
 
 ### Getting the posterior via grid approximation
 As previous we simply multiply the prior grid vector with the likelihood grid vector:
@@ -452,11 +451,11 @@ Since Moderna are not Bayesian, their analysis is very simple, they first
 find the maximum likelihood for $\theta$
 
 $$
-\theta_{mle} = E_{mle}[p(N,z\mid\theta=\frac{5}{95})=\frac{5}{95}\approx{}0.945
+\theta_{mle} = E_{mle}[p(N,z\mid\theta=\frac{5}{95})]=\frac{5}{95}\approx{}0.945
 $$
 
 In python, call the function $Binom(z,N=95,p=\frac{5}{95})$ with $z=[0, 1, ...,
-95]$, and you find, that $z=5$ is the one that is must likely value.
+95]$, and you find, that $z=5$ is the one that is the most likely value.
 
 ```
 (95 - sp.stats.binom.pmf(list(range(0, 96)), 95, 5/95).argmax()) / 95
@@ -465,8 +464,8 @@ In python, call the function $Binom(z,N=95,p=\frac{5}{95})$ with $z=[0, 1, ...,
 
 Then they ask, how likely is this data or data more extreme if we assume
 $\theta_{null}=0.4118$, and yes you heard me right, the question is how could
-the data be different if $\theta$ is fixed... Why you want to fix the
-data and let $\theta$ be free to vary... That seems absurd!
+the data be different if $\theta$ is fixed... Why would you want to fix the
+data and let $\theta$ be free to vary?... That seems absurd!
 
 $$
 p_{null} = \sum_{z=0}^{5} Binom(z|N,\theta_{null})
@@ -519,7 +518,7 @@ for posterior, company in ((posterior_pfizer, 'Pfizer'), (posterior_moderna, 'Mo
 
 Looking at the left $\theta$ plot, both the posteriors are plotted half
 transparent which makes it apparent that the moderna vaccines skews slightly further towards 1
-than the Pfizer vaccine. The white bars are the mean (not mode!), and seems to
+than the Pfizer vaccine. The two tall vertical bars are the means (not mode!), and seems to
 be to the right of the mode, suggesting that the mean is above the maximum
 likelihood, because the distribution skew right, This means that on average, we
 should expect the moderna vaccine to be a little worse than what the press
@@ -528,8 +527,8 @@ release says.
 **Intuition:** To get an intuition for this, imagine 4 guys 1 boxer and 3
 regular dudes, if a random one punches you then it will most likely not hurt
 that much, but if you are hit 100 times each time by a random person from that
-set, then you are gonna be ruffed up much more than if you were punched 100 of
-the most likely person from the set.
+set, then you are gonna be ruffed up much more than if you were punched 100
+times by the most likely person from the set.
 
 This is why it's important to think in distributions and not point estimates!,
 because the mode is only descriptive for symmetrical distributions!, and even
@@ -572,7 +571,7 @@ The mean of the two posteriors are:
 
 In summary:
 
- * $E[VE_{Pfizer}]=0.95$ (95% HDI $[0.90, 0.97]$)
+ * $E[VE_{Pfizer}]=0.95$ (95% HDI $[0.90, 0.98]$)
  * $E[VE_{Moderna}]=0.94$ (95% HDI $[0.87, 0.98]$)
 
 Is $E[VE_{Pfizer}]$ statistically significantly higher than $E[VE_{Moderna}]$?, what
